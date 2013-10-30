@@ -1,0 +1,79 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Generated on 10/27/2013 07:41:38
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Optimus.Common.Protocol.Types;
+using Optimus.Common.IO;
+using Optimus.Common.Network;
+
+namespace Optimus.Common.Protocol.Messages
+{
+
+public class SpellUpgradeSuccessMessage : NetworkMessage
+{
+
+public const uint Id = 1201;
+public override uint MessageId
+{
+    get { return Id; }
+}
+
+public int spellId;
+        public sbyte spellLevel;
+        
+
+public SpellUpgradeSuccessMessage()
+{
+}
+
+public SpellUpgradeSuccessMessage(int spellId, sbyte spellLevel)
+        {
+            this.spellId = spellId;
+            this.spellLevel = spellLevel;
+        }
+        
+
+public override void Serialize(BigEndianWriter writer)
+{
+
+writer.WriteInt(spellId);
+            writer.WriteSByte(spellLevel);
+            
+
+}
+
+public override void Deserialize(BigEndianReader reader)
+{
+
+spellId = reader.ReadInt();
+            spellLevel = reader.ReadSByte();
+            if (spellLevel < 1 || spellLevel > 6)
+                throw new Exception("Forbidden value on spellLevel = " + spellLevel + ", it doesn't respect the following condition : spellLevel < 1 || spellLevel > 6");
+            
+
+}
+
+
+}
+
+
+}

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptimusApi", "OptimusApi\OptimusApi.csproj", "{AB338186-C63A-4A51-848A-F0194BF3A6F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optimus.Common", "Optimus.Common\Optimus.Common.csproj", "{B087DD24-F15C-4DE2-9836-9F2A5C1157E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotApiTest", "BotApiTest\BotApiTest.csproj", "{DA24CFC5-8CE7-4293-99CF-C09AED221073}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB338186-C63A-4A51-848A-F0194BF3A6F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB338186-C63A-4A51-848A-F0194BF3A6F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB338186-C63A-4A51-848A-F0194BF3A6F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB338186-C63A-4A51-848A-F0194BF3A6F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B087DD24-F15C-4DE2-9836-9F2A5C1157E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B087DD24-F15C-4DE2-9836-9F2A5C1157E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B087DD24-F15C-4DE2-9836-9F2A5C1157E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B087DD24-F15C-4DE2-9836-9F2A5C1157E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA24CFC5-8CE7-4293-99CF-C09AED221073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA24CFC5-8CE7-4293-99CF-C09AED221073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA24CFC5-8CE7-4293-99CF-C09AED221073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA24CFC5-8CE7-4293-99CF-C09AED221073}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
