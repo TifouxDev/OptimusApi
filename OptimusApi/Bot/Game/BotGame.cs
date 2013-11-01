@@ -1,5 +1,4 @@
-﻿using OptimusApi.Bot.Game.Bot;
-using OptimusApi.Bot.Game.Map;
+﻿using OptimusApi.Bot.Game.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,8 @@ namespace OptimusApi.Bot.Game
         {
             client = bot;
             World = new World(client);
-            Character = new Player();
+            Character = new Player(client);
+            bot.Network.Dispatcher.Register(Character);
         }
        
     }

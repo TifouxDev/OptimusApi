@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptography\RSAManager.cs" />
+    <Compile Include="Data\I18nFileAccessor.cs" />
     <Compile Include="Dispatching\Dispatcher.cs" />
     <Compile Include="Dispatching\MessageHandlerAttribute.cs" />
     <Compile Include="Dispatching\MethodHandler.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Enums\AllianceRightsBitEnum.cs" />
     <Compile Include="Enums\BreedEnum.cs" />
     <Compile Include="Enums\BuildTypeEnum.cs" />
+    <Compile Include="Enums\ChannelTchatEnum.cs" />
     <Compile Include="Enums\CharacterCreationResultEnum.cs" />
     <Compile Include="Enums\CharacterDeletionErrorEnum.cs" />
     <Compile Include="Enums\CharacterInventoryPositionEnum.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Enums\HardcoreDeathStateEnum.cs" />
     <Compile Include="Enums\IdentificationFailureReasonEnum.cs" />
     <Compile Include="Enums\ListAddFailureEnum.cs" />
+    <Compile Include="Enums\MapDirection.cs" />
     <Compile Include="Enums\MapObstacleStateEnum.cs" />
     <Compile Include="Enums\MountEquipedErrorEnum.cs" />
     <Compile Include="Enums\NicknameErrorEnum.cs" />
@@ -131,6 +135,7 @@
     <Compile Include="Enums\UpdatableMountBoostEnum.cs" />
     <Compile Include="IO\BigEndianReader.cs" />
     <Compile Include="IO\BigEndianWriter.cs" />
+    <Compile Include="IO\FastBigEndianReader.cs" />
     <Compile Include="IO\IDataReader.cs" />
     <Compile Include="IO\IDataWriter.cs" />
     <Compile Include="Log\Logger.cs" />

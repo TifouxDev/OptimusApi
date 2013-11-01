@@ -37,7 +37,7 @@ namespace Optimus.Common.Dispatching
 
                 Type type = @object.GetType();
 
-                foreach (var methodInfo in type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+                foreach (var methodInfo in type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
                 {
                     MessageHandlerAttribute[] attributes = methodInfo.GetCustomAttributes<MessageHandlerAttribute>().ToArray();
                     if (attributes.Length != 0)
@@ -107,7 +107,6 @@ namespace Optimus.Common.Dispatching
                             }
                         }
                     }
-
                     // test nouveau système de traitement de packet par priority pas totalement sur.
                     IEnumerable<MethodHandler> test = functions.OrderByDescending(pet => pet.Attributes[0].Priority);
                     foreach(MethodHandler func in test)

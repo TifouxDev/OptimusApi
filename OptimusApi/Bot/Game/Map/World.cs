@@ -2,6 +2,7 @@
 using Optimus.Common.Protocol.Enums;
 using Optimus.Common.Protocol.Messages;
 using Optimus.Common.Protocol.Types;
+using OptimusApi.Bot.Game.Tchat;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,6 +21,7 @@ namespace OptimusApi.Bot.Game.Map
         public Character[] Players { get; private set; }
         public Monster[] Monsters { get; private set; }
         public Point Position { get; private set; }
+        public BotMessenger Tchat { get; private set; }
 
         private BotManager client;
 
@@ -30,10 +32,11 @@ namespace OptimusApi.Bot.Game.Map
         {
             client = bot;
             bot.Network.Dispatcher.Register(this);
+            Tchat = new BotMessenger(client);
         }
 
         [MessageHandler(CurrentMapMessage.Id, Optimus.Common.Enums.PriorityPacket.VERY_HIGH)]
-        public void HandleCurrentMap(CurrentMapMessage message)
+        private void HandleCurrentMap(CurrentMapMessage message)
         {
             int CurrentMapid = message.mapId;
             MapID = CurrentMapid;
@@ -42,25 +45,24 @@ namespace OptimusApi.Bot.Game.Map
         }
 
         [MessageHandler(MapComplementaryInformationsDataMessage.Id, Optimus.Common.Enums.PriorityPacket.VERY_HIGH)]
-        public void HandlerMapInformation(MapComplementaryInformationsDataMessage message)
+        private void HandlerMapInformation(MapComplementaryInformationsDataMessage message)
         {
             List<Character> players = new List<Character>();
             List<Monster> monsters  = new List<Monster>();
-
             foreach (GameRolePlayActorInformations player in message.actors)
             {
                 switch (player.TypeId)
                 {
                     case 36: // joueur
-                        players.Add(new Character(player));
-                        if (player.contextualId == client.Game.Character.ContextualId) // si c'est le bot on initialize la cellide et direction
+                        if (client.Game.Character.ContextualId == player.contextualId)
                         {
-                            client.Game.Character.CellId = player.disposition.cellId;
-                            client.Game.Character.Direction = player.disposition.direction;
+                            client.Game.Character.Update(player);
                         }
+                        Character actor = new Character();
+                        actor.Update(player);
                     break;
 
-                    case 160: // montre
+                    case 160: // monstre
                         monsters.Add(new Monster(player));
                     break;
 
@@ -73,28 +75,21 @@ namespace OptimusApi.Bot.Game.Map
             this.Players = players.ToArray();
             this.Monsters = monsters.ToArray();
             Optimus.Common.Log.Logger.GetInstance("Player{Debug}").Debug(string.Format("They are {0} player(s) on the map and {1} house!", message.actors.Length, message.houses.Length));
-
         }
 
         [MessageHandler(GameRolePlayShowActorMessage.Id, Optimus.Common.Enums.PriorityPacket.VERY_HIGH)]
-        public void HandlerActorShow(GameRolePlayShowActorMessage message)
+        private void HandlerActorShow(GameRolePlayShowActorMessage message)
         {
             if (PlayerEnterMap != null){
                 if (message.informations.TypeId == 36) 
-                { 
-                    PlayerEnterMap(this, new Character(message.informations));
+                {
+                    Character c = new Character();
+                    c.Update(message.informations);
+                    PlayerEnterMap(this, c);
                 }
             }
-
             Optimus.Common.Log.Logger.GetInstance(string.Format("Bot[{0}]=>", client.Account.Name)).Debug("Nouveaux personnage sur la carte!");
         }
-
-        [MessageHandler(CharacterSelectedSuccessMessage.Id, Optimus.Common.Enums.PriorityPacket.VERY_HIGH)]
-        public void CharacterSelected(CharacterSelectedSuccessMessage message)
-        {
-            client.Game.Character.IniCharacterBaseInformation(message.infos);
-        }
-
 
     }
 }

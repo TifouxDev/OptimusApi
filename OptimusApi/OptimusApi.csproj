@@ -48,13 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bot\Game\BotGame.cs" />
-    <Compile Include="Bot\Game\Bot\Player.cs" />
+    <Compile Include="Bot\Game\Player.cs" />
     <Compile Include="Bot\Game\Map\Character.cs" />
     <Compile Include="Bot\Game\Map\Monster.cs" />
     <Compile Include="Bot\Game\Map\World.cs" />
+    <Compile Include="Bot\Game\Tchat\BotMessenger.cs" />
     <Compile Include="Bot\Interface\AccountInformation.cs" />
     <Compile Include="Bot\BotManager.cs" />
     <Compile Include="Bot\Interface\IProtocol.cs" />
+    <Compile Include="Bot\Interface\Tchat\IMessenger.cs" />
+    <Compile Include="Bot\Interface\Tchat\Messenger.cs" />
     <Compile Include="Game\GameAuthentification.cs" />
     <Compile Include="Game\Logic\Common\ChatFrame.cs" />
     <Compile Include="Login\AuthentificationMessage.cs" />

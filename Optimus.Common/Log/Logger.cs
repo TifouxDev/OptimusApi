@@ -19,7 +19,6 @@ namespace Optimus.Common.Log
                 Ini(); }
            
             return LogManager.GetLogger(name);
-     
         }
 
         private static void Ini()
