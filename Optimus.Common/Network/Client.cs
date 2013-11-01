@@ -53,7 +53,6 @@ namespace Optimus.Common.Network
             log = Log.Logger.GetInstance("(Bot) => ");
         }
 
-
         private void reloadLatency()
         {
             startTimer = DateTime.Now.Millisecond;
@@ -207,7 +206,7 @@ namespace Optimus.Common.Network
             Dispatcher.Register(this);
         }
 
-        public uint LatencyAvg()
+        internal uint LatencyAvg()
         {
             if (this.latencyBuffer.Count == 0)
                 return 0;
@@ -220,13 +219,13 @@ namespace Optimus.Common.Network
 
             return (uint)(_loc1_ / this.latencyBuffer.Count);
         }
-      
-        public uint LatencySamplesCount()
+
+        internal uint LatencySamplesCount()
         {
             return (uint)this.latencyBuffer.Count;
         }
 
-        public void LowSend()
+        internal void LowSend()
         {
             this.latestSent = GetTimer();
             this.LastSent = GetTimer();
@@ -243,13 +242,13 @@ namespace Optimus.Common.Network
             return (uint)(DateTime.Now.Millisecond - elapse);
         }
 
-        public uint LatencySamplesMax()
+        internal uint LatencySamplesMax()
         {
             return 50;
         }
 
-        [MessageHandler(SequenceNumberRequestMessage.Id)]
-        public void SequenceNumber(SequenceNumberRequestMessage message)
+        [MessageHandler(SequenceNumberRequestMessage.Id, Enums.PriorityPacket.VERY_HIGH)]
+        private void SequenceNumber(SequenceNumberRequestMessage message)
         {
             this.sendSequenceId++;
             SequenceNumberMessage reponse = new SequenceNumberMessage((ushort)sendSequenceId);
@@ -268,6 +267,14 @@ namespace Optimus.Common.Network
             Console.ForegroundColor = color;
             Console.Write(message + "\n");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        [MessageHandler(BasicLatencyStatsRequestMessage.Id, Enums.PriorityPacket.VERY_HIGH)]
+        private void LatencyRequest(BasicLatencyStatsRequestMessage message)
+        {
+            ushort latency = (ushort)(Math.Min(32767, LatencyAvg()));
+            BasicLatencyStatsMessage blsm = new BasicLatencyStatsMessage(latency, (short)LatencySamplesCount(), (short)LatencySamplesMax());
+            Send(blsm);
         }
       }
     }
