@@ -2,6 +2,8 @@
 using OptimusApi.Bot;
 using OptimusApi.Bot.Game.Map;
 using OptimusApi.Bot.Game.Tchat;
+using OptimusApi.Tool.D2P;
+using OptimusApi.Tool.D2P.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +16,11 @@ namespace BotApiTest
     {
         static void Main(string[] args)
         {
-            BotManager bot = new BotManager("ndc", "mdp", true);
-            new test(bot);
-            bot.Game.World.Tchat.MessageReceived += new MessageReceived(Tchat_MessageReceived);
-            while (true)
-            {
-          
-            }
-        }
-        
-        private static void Tchat_MessageReceived(object sender, OptimusApi.Bot.Interface.Tchat.IMessenger message)
-        {
-            Console.WriteLine(string.Format("[{0}] {1} : {2}", message.Channel.ToString(), message.Author, message.Message));
+            //Console.WriteLine(25021 & 4095); ;
+            BotManager bot = new BotManager("ndc", "mdp", true);              
+             new test(bot);
+           new AuthentificationSuivie(bot);
+            Console.Read();
         }
 
     }
